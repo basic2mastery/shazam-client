@@ -6,20 +6,16 @@ export default class SongSearch extends React.Component {
     super();
     this.state = {
       tracks: [],
-			srchtext: "",
+      srchtext: "",
     };
     this.search = this.search.bind(this);
-		this.textChange=this.textChange.bind(this);
+    this.textChange = this.textChange.bind(this);
   }
-	
-	textChange(text){
-		
-		this.setState({srchtext:text})
-		
-		
-	}
-	
-	
+
+  textChange(text) {
+    this.setState({ srchtext: text });
+  }
+
   async search() {
     var options = {
       method: "GET",
@@ -41,14 +37,15 @@ export default class SongSearch extends React.Component {
     console.log(this.state.tracks);
     return (
       <>
-        <input type="text" onChange={this.textChange}/> {/*{} for js*/}
+        <input type="text" onChange={this.textChange} /> {/*{} for js*/}
         <button onClick={this.search}>search</button>
         {this.state.tracks.map((track) => (
           <div className="song">
-						
             <div className="title"> {track.heading.title} </div>
             <div className="artist"> {track.heading.subtitle} </div>
-            <div className="logo"><img src={track.images.default} /></div>
+            <div className="logo">
+              <img src={track.images.default} />
+            </div>
           </div>
         ))}
       </>
