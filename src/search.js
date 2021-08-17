@@ -6,15 +6,26 @@ export default class SongSearch extends React.Component {
     super();
     this.state = {
       tracks: [],
+			srchtext: "",
     };
     this.search = this.search.bind(this);
+		this.textChange=this.textChange.bind(this);
   }
-
+	
+	textChange(text){
+		
+		this.setState({srchtext:text})
+		
+		
+	}
+	
+	
   async search() {
     var options = {
       method: "GET",
       url: "https://shazam-core.p.rapidapi.com/v1/tracks/search",
-      params: { query: "Wellerman" },
+      /*params: { query: this.state.srchtext },*/
+      params: { query: "wellerman" },
       headers: {
         "x-rapidapi-key": "",
         "x-rapidapi-host": "shazam-core.p.rapidapi.com",
@@ -30,13 +41,14 @@ export default class SongSearch extends React.Component {
     console.log(this.state.tracks);
     return (
       <>
-        <input type="text" />
+        <input type="text" onChange={this.textChange}/> {/*{} for js*/}
         <button onClick={this.search}>search</button>
         {this.state.tracks.map((track) => (
-          <div>
-            <h1> {track.heading.title} </h1>
-            <h1> {track.heading.subtitle} </h1>
-            <img src={track.images.default} />
+          <div className="song">
+						
+            <div className="title"> {track.heading.title} </div>
+            <div className="artist"> {track.heading.subtitle} </div>
+            <div className="logo"><img src={track.images.default} /></div>
           </div>
         ))}
       </>
