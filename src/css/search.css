@@ -1,0 +1,11 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 600px
+}
+
+.logo img {
+  width: 200px;
+  padding: 20px;
+}
