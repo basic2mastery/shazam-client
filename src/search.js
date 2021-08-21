@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import "./css/song.css";
+import "./css/search.css";
 export default class SongSearch extends React.Component {
   constructor() {
     super();
@@ -8,6 +8,7 @@ export default class SongSearch extends React.Component {
       tracks: [],
       srchtext: "",
     };
+
     this.search = this.search.bind(this);
     this.textChange = this.textChange.bind(this);
   }
@@ -20,8 +21,7 @@ export default class SongSearch extends React.Component {
     var options = {
       method: "GET",
       url: "https://shazam-core.p.rapidapi.com/v1/tracks/search",
-      /*params: { query: this.state.srchtext },*/
-      params: { query: "wellerman" },
+      params: { query: this.state.srchtext },
       headers: {
         "x-rapidapi-key": "",
         "x-rapidapi-host": "shazam-core.p.rapidapi.com",
@@ -34,11 +34,12 @@ export default class SongSearch extends React.Component {
   }
 
   render() {
-    console.log(this.state.tracks);
+    // console.log(this.state.tracks);
     return (
       <>
-        <input type="text" onChange={this.textChange} /> {/*{} for js*/}
+        <input type="text" onChange={(event) => this.textChange(event.target.value)} /> {/*{} for js*/}
         <button onClick={this.search}>search</button>
+        <div className="wrapper">
         {this.state.tracks.map((track) => (
           <div className="song">
             <div className="title"> {track.heading.title} </div>
@@ -48,6 +49,7 @@ export default class SongSearch extends React.Component {
             </div>
           </div>
         ))}
+        </div>
       </>
     );
   }
